@@ -94,7 +94,7 @@
                     <div class="col-sm-4">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <a href="#">Category</a>
+                                <a href="{{route('categories.index')}}">Category</a>
                             </li>
                             <li class="list-group-item">
                                 <a href="#">Post</a>
@@ -102,6 +102,11 @@
                         </ul>
                     </div>
                     <div class="col-sm-8">
+                        @if (Session()->has('success'))
+                            <div class="alert alert-success">
+                                {{Session()->get('success')}}
+                            </div>
+                        @endif
                         @yield('content')
                     </div>
                 </div>
