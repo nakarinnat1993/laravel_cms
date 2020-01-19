@@ -32,7 +32,7 @@
                     <form action="{{route('posts.destroy',$row->id)}}" method="post" class="delete-form">
                         @csrf
                         @method('DELETE')
-                        <input type="submit" value="Deletes" class="btn btn-danger btn-sm">
+                        <input type="submit" value="Delete" class="btn btn-danger btn-sm">
                     </form>
 
             </tr>
