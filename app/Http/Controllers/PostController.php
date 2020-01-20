@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -48,6 +49,7 @@ class PostController extends Controller
             'content' => $request->content,
             'image' => $image,
         ]);
+        $request->flash();
         Session()->flash('success', 'Save success');
         return redirect(route('posts.index'));
     }
@@ -69,9 +71,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('posts.create')->with('post',$post);
     }
 
     /**
@@ -81,9 +83,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $data = $request->only(['title','description','content']);
+        if($request->hasFile('image')){
+            $image=$request->image->store('posts');
+            $post->deleteImage();
+            $data['image']=$image;
+        }
+        $post->update($data);
+        Session()->flash('success', 'Update success');
+        return redirect(route('posts.index'));
     }
 
     /**

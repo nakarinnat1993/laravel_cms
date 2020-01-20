@@ -18,7 +18,8 @@
 
     </div>
     <div class="card-body">
-        <form action="{{isset($post)?route('posts.update',$post->id):route('posts.store')}}" method="post" enctype="multipart/form-data">
+        <form action="{{isset($post)?route('posts.update',$post->id):route('posts.store')}}" method="post"
+            enctype="multipart/form-data">
             @csrf
             @if (isset($post))
             @method('PUT')
@@ -26,16 +27,18 @@
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" name="title" id="title" class="form-control"
-                    value="{{isset($post)?$post->title:""}}">
+                    value="{{isset($post)?$post->title: old('title') }}">
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
                 <input type="text" name="description" id="description" class="form-control"
-                    value="{{isset($post)?$post->description:""}}">
+                    value="{{isset($post)?$post->description:old('description')}}">
             </div>
             <div class="form-group">
                 <label for="content">Content</label>
-                <textarea name="content" id="content" class="form-control">{{isset($post)?$post->content:""}}</textarea>
+                <input id="x" type="hidden" name="content" value="{{isset($post)?$post->content:old('content')}}">
+                <trix-editor input="x"></trix-editor>
+                {{-- <textarea name="content" id="content" class="form-control"></textarea> --}}
             </div>
             <div class="form-group">
                 <label for="image">Image</label>
@@ -48,5 +51,6 @@
     </div>
 
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.css">
 @endsection
