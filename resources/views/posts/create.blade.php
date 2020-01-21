@@ -45,6 +45,23 @@
                 <input type="file" name="image" id="image">
             </div>
             <div class="form-group">
+                <label for="category_id">Category</label>
+                <select name="category_id" id="category_id" class="form-control">
+                    <option value="">Select</option>
+                    @foreach ($categories as $category)
+                    <option value="{{$category->id}}"
+                        @if (isset($post))
+                            @if ($post->category_id==$category->id)
+                                selected
+                            @endif
+                        @endif
+                        >{{$category->name}}</option>
+
+                    @endforeach
+
+                </select>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="{{isset($post)?"Update":"Add"}}" class="btn btn-success">
             </div>
         </form>

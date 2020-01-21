@@ -19,6 +19,7 @@
                 <th>Image</th>
                 <th>Title</th>
                 <th>Description</th>
+                <th>Category</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </thead>
@@ -27,6 +28,7 @@
                 <td><img src="storage/{{$row->image}}" alt="" srcset="" width="65px"></td>
                 <td>{{$row->title}}</td>
                 <td>{{$row->description}}</td>
+                <td>{{$row->category->name}}</td>
                 <td><a href="{{route('posts.edit',$row->id)}}" class="btn btn-warning btn-sm">Edit</a></td>
                 <td>
                     <form action="{{route('posts.destroy',$row->id)}}" method="post" class="delete-form">

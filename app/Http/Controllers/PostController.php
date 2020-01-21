@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Post;
+use App\Category;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -18,6 +19,7 @@ class PostController extends Controller
     {
         //
         $posts = Post::All();
+        // dd($posts);
         return view("posts.index",compact('posts'));
     }
 
@@ -29,7 +31,8 @@ class PostController extends Controller
     public function create()
     {
         //
-        return view("posts.create");
+        $categories = Category::all();
+        return view("posts.create",compact('categories'));
     }
 
     /**
@@ -48,6 +51,7 @@ class PostController extends Controller
             'description' => $request->description,
             'content' => $request->content,
             'image' => $image,
+            'category_id' => $request->category_id,
         ]);
         $request->flash();
         Session()->flash('success', 'Save success');
@@ -73,7 +77,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.create')->with('post',$post);
+        return view('posts.create')->with('post',$post)->with('categories',Category::All());
     }
 
     /**
@@ -85,12 +89,13 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $data = $request->only(['title','description','content']);
+        $data = $request->only(['title','description','content','category_id']);
         if($request->hasFile('image')){
             $image=$request->image->store('posts');
             $post->deleteImage();
             $data['image']=$image;
         }
+        // dd($data);
         $post->update($data);
         Session()->flash('success', 'Update success');
         return redirect(route('posts.index'));
