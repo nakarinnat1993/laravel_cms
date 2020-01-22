@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+    <script src="{{ asset('js/app.js') }}" ></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -105,6 +105,11 @@
                         @if (Session()->has('success'))
                             <div class="alert alert-success">
                                 {{Session()->get('success')}}
+                            </div>
+                        @endif
+                        @if (Session()->has('error'))
+                            <div class="alert alert-danger">
+                                {{Session()->get('error')}}
                             </div>
                         @endif
                         @yield('content')
