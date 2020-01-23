@@ -22,4 +22,5 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('categories', 'CategoryController');
     Route::resource('posts', 'PostController');
+    Route::resource('tags', 'TagsController');
 });
