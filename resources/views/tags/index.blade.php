@@ -18,7 +18,7 @@
             <thead>
                 {{-- <th>Id.</th> --}}
                 <th>Name</th>
-                {{-- <th>Count Posts</th> --}}
+                <th>Count Posts</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </thead>
@@ -26,7 +26,7 @@
             <tr>
                 {{-- <td>{{$row->id}}</td> --}}
                 <td>{{$row->name}}</td>
-                {{-- <td>{{$row->post->count()}}</td> --}}
+                <td>{{$row->posts->count()}}</td>
                 <td><a href="{{route('tags.edit',$row->id)}}" class="btn btn-warning btn-sm">Edit</a></td>
                 <td>
                     <form action="{{route('tags.destroy',$row->id)}}" method="post" class="delete-form">

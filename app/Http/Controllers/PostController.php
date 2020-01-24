@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Post;
-use App\Category;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function __construct(){
-        $this->middleware('verifyCategory')->only(['create','store']);
+    public function __construct()
+    {
+        $this->middleware('verifyCategory')->only(['create', 'store']);
     }
     /**
      * Display a listing of the resource.
@@ -23,7 +25,7 @@ class PostController extends Controller
         //
         $posts = Post::All();
         // dd($posts);
-        return view("posts.index",compact('posts'));
+        return view("posts.index", compact('posts'));
     }
 
     /**
@@ -35,7 +37,8 @@ class PostController extends Controller
     {
         //
         $categories = Category::all();
-        return view("posts.create",compact('categories'));
+        $tags = Tag::all();
+        return view("posts.create", compact('categories', 'tags'));
     }
 
     /**
@@ -47,15 +50,18 @@ class PostController extends Controller
     public function store(CreatePostRequest $request)
     {
         // dd($request->all());
-        $image=$request->image->store('posts');
+        $image = $request->image->store('posts');
         // dd($image);
-        Post::create([
+        $post = Post::create([
             'title' => $request->title,
             'description' => $request->description,
             'content' => $request->content,
             'image' => $image,
             'category_id' => $request->category_id,
         ]);
+        if($request->tag_id){
+            $post->tags()->attach($request->tag_id);
+        }
         $request->flash();
         Session()->flash('success', 'Save success');
         return redirect(route('posts.index'));
@@ -80,7 +86,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.create')->with('post',$post)->with('categories',Category::All());
+        return view('posts.create')->with('post', $post)->with('categories', Category::All())->with('tags', Tag::All());
     }
 
     /**
@@ -92,13 +98,16 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $data = $request->only(['title','description','content','category_id']);
-        if($request->hasFile('image')){
-            $image=$request->image->store('posts');
+        $data = $request->only(['title', 'description', 'content', 'category_id']);
+        if ($request->hasFile('image')) {
+            $image = $request->image->store('posts');
             $post->deleteImage();
-            $data['image']=$image;
+            $data['image'] = $image;
         }
         // dd($data);
+        if($request->tag_id){
+            $post->tags()->sync($request->tag_id);
+        }
         $post->update($data);
         Session()->flash('success', 'Update success');
         return redirect(route('posts.index'));

@@ -62,6 +62,22 @@
                 </select>
             </div>
             <div class="form-group">
+                <label for="tag_id">Tag</label>
+                <select name="tag_id[]" id="tag_id" class="form-control" multiple>
+                    @foreach ($tags as $tag)
+                    <option value="{{$tag->id}}"
+                        @if (isset($post))
+                            @if ($post->hasTag($tag->id))
+                                selected
+                            @endif
+                        @endif
+                        >{{$tag->name}}</option>
+
+                    @endforeach
+
+                </select>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="{{isset($post)?"Update":"Add"}}" class="btn btn-success">
             </div>
         </form>

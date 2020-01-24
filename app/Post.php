@@ -14,9 +14,15 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
-
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
     public function deleteImage()
     {
         Storage::delete($this->image);
+    }
+    public function hasTag($tagID){
+        return in_array($tagID,$this->tags->pluck('id')->toArray());
     }
 }
