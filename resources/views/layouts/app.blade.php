@@ -104,6 +104,12 @@
                             <li class="list-group-item">
                                 <a href="{{route('posts.index')}}">Post</a>
                             </li>
+                            @if (auth()->user()->isAdmin())
+                                <li class="list-group-item">
+                                    <a href="{{route('users.index')}}">User</a>
+                                </li>
+
+                            @endif
                         </ul>
                     </div>
                     <div class="col-sm-8">

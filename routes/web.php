@@ -19,8 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['auth']], function () {
-
     Route::resource('categories', 'CategoryController');
     Route::resource('posts', 'PostController');
     Route::resource('tags', 'TagsController');
+});
+Route::group(['middleware' => ['auth','verifyAdmin']], function () {
+    Route::get('user', 'UserController@index')->name('users.index');
+    Route::post('user/{user}/makeadmin', 'UserController@makeadmin')->name('users.makeadmin');
 });

@@ -22,19 +22,19 @@
                 <th>Edit</th>
                 <th>Delete</th>
             </thead>
-            @foreach ($tags as $row)
+            @foreach ($tags as $tag)
             <tr>
-                {{-- <td>{{$row->id}}</td> --}}
-                <td>{{$row->name}}</td>
-                <td>{{$row->posts->count()}}</td>
-                <td><a href="{{route('tags.edit',$row->id)}}" class="btn btn-warning btn-sm">Edit</a></td>
+                {{-- <td>{{$tag->id}}</td> --}}
+                <td>{{$tag->name}}</td>
+                <td>{{$tag->posts->count()}}</td>
+                <td><a href="{{route('tags.edit',$tag->id)}}" class="btn btn-warning btn-sm">Edit</a></td>
                 <td>
-                    <form action="{{route('tags.destroy',$row->id)}}" method="post" class="delete-form">
+                    <form action="{{route('tags.destroy',$tag->id)}}" method="post" class="delete-form">
                         @csrf
                         @method('DELETE')
                         <input type="submit" value="Delete" class="btn btn-danger btn-sm">
                     </form>
-
+                </td>
             </tr>
 
             @endforeach

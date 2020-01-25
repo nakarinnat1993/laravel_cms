@@ -22,19 +22,19 @@
                 <th>Edit</th>
                 <th>Delete</th>
             </thead>
-            @foreach ($categories as $row)
+            @foreach ($categories as $category)
             <tr>
-                {{-- <td>{{$row->id}}</td> --}}
-                <td>{{$row->name}}</td>
-                <td>{{$row->posts->count()}}</td>
-                <td><a href="{{route('categories.edit',$row->id)}}" class="btn btn-warning btn-sm">Edit</a></td>
+                {{-- <td>{{$category->id}}</td> --}}
+                <td>{{$category->name}}</td>
+                <td>{{$category->posts->count()}}</td>
+                <td><a href="{{route('categories.edit',$category->id)}}" class="btn btn-warning btn-sm">Edit</a></td>
                 <td>
-                    <form action="{{route('categories.destroy',$row->id)}}" method="post" class="delete-form">
+                    <form action="{{route('categories.destroy',$category->id)}}" method="post" class="delete-form">
                         @csrf
                         @method('DELETE')
                         <input type="submit" value="Delete" class="btn btn-danger btn-sm">
                     </form>
-
+                </td>
             </tr>
 
             @endforeach
