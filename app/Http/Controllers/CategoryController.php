@@ -101,6 +101,10 @@ class CategoryController extends Controller
     {
         //
         // dd($category);
+        if($category->posts->count()>0){
+            session()->flash('error','Can not delete because post was not posted');
+            return redirect()->back();
+        }
         $category->delete();
         Session()->flash('success', 'Delete success');
         return redirect(route('categories.index'));

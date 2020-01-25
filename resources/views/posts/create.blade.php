@@ -63,7 +63,7 @@
             </div>
             <div class="form-group">
                 <label for="tag_id">Tag</label>
-                <select name="tag_id[]" id="tag_id" class="form-control" multiple>
+                <select name="tag_id[]" id="select-tag" class="form-control"  multiple>
                     @foreach ($tags as $tag)
                     <option value="{{$tag->id}}"
                         @if (isset($post))
@@ -86,4 +86,9 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.css">
+<script>
+    $(document).ready(function(){
+        $("#select-tag").select2();
+    })
+</script>
 @endsection

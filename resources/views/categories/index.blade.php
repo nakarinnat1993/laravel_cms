@@ -26,7 +26,7 @@
             <tr>
                 {{-- <td>{{$row->id}}</td> --}}
                 <td>{{$row->name}}</td>
-                <td>{{$row->post->count()}}</td>
+                <td>{{$row->posts->count()}}</td>
                 <td><a href="{{route('categories.edit',$row->id)}}" class="btn btn-warning btn-sm">Edit</a></td>
                 <td>
                     <form action="{{route('categories.destroy',$row->id)}}" method="post" class="delete-form">
