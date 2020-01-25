@@ -123,6 +123,7 @@ class PostController extends Controller
     {
         $post->deleteImage();
         $post->delete();
+        $post->tags()->detach($post->post_id);
         Session()->flash('success', 'Delete success');
         return redirect(route('posts.index'));
     }
