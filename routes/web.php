@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +11,7 @@
 */
 
 Route::get('/', 'WelcomeController@index');
+Route::get('blog/post/{post}', 'Blog\PostController@show')->name('blog.show');
 
 Auth::routes();
 

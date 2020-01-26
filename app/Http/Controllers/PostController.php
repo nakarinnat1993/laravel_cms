@@ -58,6 +58,7 @@ class PostController extends Controller
             'content' => $request->content,
             'image' => $image,
             'category_id' => $request->category_id,
+            'user_id' => auth()->user()->id,
         ]);
         if($request->tag_id){
             $post->tags()->attach($request->tag_id);
