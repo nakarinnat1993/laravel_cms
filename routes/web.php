@@ -10,7 +10,7 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', 'WelcomeController@index')->name('welcome');
 Route::get('blog/post/{post}', 'Blog\PostController@show')->name('blog.show');
 
 Auth::routes();

@@ -24,7 +24,7 @@
 
             <div class="navbar-left">
                 <button class="navbar-toggler" type="button">&#9776;</button>
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="{{route('welcome')}}">
                     <h3>
                         <font color='white'>Home</font>
                     </h3>

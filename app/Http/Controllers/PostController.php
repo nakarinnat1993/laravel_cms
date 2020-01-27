@@ -24,7 +24,6 @@ class PostController extends Controller
     {
         //
         $posts = Post::All();
-        // dd($posts);
         return view("posts.index", compact('posts'));
     }
 

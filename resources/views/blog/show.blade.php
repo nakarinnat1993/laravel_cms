@@ -15,7 +15,7 @@
                 <p class="opacity-70 text-uppercase small ls-1">{{$post->category->name}}</p>
                 <h1 class="display-4 mt-7 mb-8">{{$post->title}}</h1>
                 <p><span class="opacity-70 mr-1">By</span> <a class="text-white" href="#">{{$post->user->name}}</a></p>
-                <p><img class="avatar avatar-sm" src="../assets/img/avatar/2.jpg" alt="..."></p>
+                <p><img class="avatar avatar-sm" src="{{ Gravatar::src($post->user->email) }}" alt="..."></p>
 
             </div>
 
@@ -43,6 +43,29 @@
 
             </div>
         </div>
+        <br>
+        <div id="disqus_thread"></div>
     </div>
 </div>
+
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+    var disqus_config = function () {
+            this.page.url = "{{config('app.url')}}/blog/post/{{$post->id}}";  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = "{{$post->id}}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://http-localhost-8000-e3vwrfrkys.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>
+
 @endsection
