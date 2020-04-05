@@ -54,6 +54,10 @@
                             @if ($post->category_id==$category->id)
                                 selected
                             @endif
+                        @else
+                            @if (old('category_id')==$category->id)
+                                selected
+                            @endif
                         @endif
                         >{{$category->name}}</option>
 
