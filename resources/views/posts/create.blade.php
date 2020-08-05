@@ -18,6 +18,7 @@
 
     </div>
     <div class="card-body">
+        test
         <form action="{{isset($post)?route('posts.update',$post->id):route('posts.store')}}" method="post"
             enctype="multipart/form-data">
             @csrf
